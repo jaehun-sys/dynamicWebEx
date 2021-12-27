@@ -17,6 +17,17 @@
 	
 	StringBuilder sql = new StringBuilder();
 	
+	//페이징 처리
+	int cPage = 0;
+	String tempPage = request.getParameter("page");
+	if(tempPage==null || tempPage.length()==0){	//cPage(현재페이지)
+		cPage=1;
+	}
+	try{
+		cPage=Integer.parseInt(tempPage);
+	}catch(NumberFormatException e){
+		cPage=1;
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -57,6 +68,7 @@
 			sql.append(" 	 HR.DEPARTMENTS D  ");
 			sql.append("WHERE M.EMPLOYEE_ID = E.MANAGER_ID ");
 			sql.append("AND   E.DEPARTMENT_ID = D.DEPARTMENT_ID ");
+			sql.append("AND   E.EMPLOYEE_ID = " + request.getParameter("emp_id") + " ");
 			sql.append("ORDER BY E.EMPLOYEE_ID ");
 			pstmt = conn.prepareStatement(sql.toString());
 			rs = pstmt.executeQuery();
