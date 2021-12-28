@@ -15,16 +15,18 @@
 	String user = "webdb";
 	String pass = "webdb12";
 	
-	String sql = "select author_id, author_name, author_desc from author order by author_id ";
+	StringBuilder sql = new StringBuilder();
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<link rel="stylesheet" href="./css/table.css">
 </head>
 <body>
-	<table width="800" border="1">
+	<table width="800" class="tbl-ex">
 		<tr>
 			<th>저자번</th>
 			<th>저자</th>
@@ -34,12 +36,17 @@
 		try {
 		// 1. JDBC 드라이버 (Oracle) 로딩 
 			Class.forName("oracle.jdbc.driver.OracleDriver");
+			sql.append("SELECT A.AUTHOR_ID	 		 AS author_id     , ");
+			sql.append("	   A.AUTHOR_NAME		 AS author_name   , ");
+			sql.append("	   A.AUTHOR_DESC		 AS author_desc     ");
+			sql.append("FROM AUTHOR   A ");
+			sql.append("ORDER BY author_id ");
 			
 		// 2. Connection 얻어오기
 			conn = DriverManager.getConnection(url, user, pass);
 			
 		// 3. SQL문 준비 / 바인딩 / 실행 
-			pstmt = conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql.toString());
 			rs = pstmt.executeQuery();
 			
 		// 4.결과처리
@@ -77,5 +84,7 @@
 		}
 		%>
 	</table>
+	
+	<br><a href="./home.html">돌아가기</a>
 </body>
 </html>
