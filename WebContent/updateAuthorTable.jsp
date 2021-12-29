@@ -67,8 +67,7 @@
 		} finally {
 		// 5. 자원정리
 			try {
-				out.println("<span>수정되었습니다!</span>");
-				
+				out.print("<p>수정되었습니다!</p>");
 			if (pstmt != null) { 
 				pstmt.close();
 			} 
@@ -81,7 +80,7 @@
 			}
 		}
 		%>
-		<br><a href="./home.html">돌아가기</a>
+ 		<br><a href="./home.html">돌아가기</a> 
 	<!-- 
 	</table>
 	 -->

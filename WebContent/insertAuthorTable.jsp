@@ -54,7 +54,7 @@ try {
   System.out.println("error:" + e);
 } finally {
   try {
-	out.println("<span>입력되었습니다!</span>");
+	out.print("<p>입력되었습니다!</p>");
     if(pstmt != null) { pstmt.close();}
     if(conn != null)  { conn.close(); }
   } catch (SQLException e) {
